@@ -20,11 +20,6 @@ resource "azuread_service_principal_password" "myspnkey" {
   }
 }
 
-# resource "azurerm_role_assignment" "creation" {
-#   scope                = module.serviceprincipal.service_principle_subscription_id
-#   role_definition_name = var.service_principal_role_assignment
-#   principal_id         = module.serviceprincipal.service_principle_application_id
-# }
 /* resource group creation */
 
 resource "azurerm_resource_group" "myresourcegroup" {
@@ -44,27 +39,6 @@ module "keyvault" {
   key_vault_sku_name            = var.key_vault_sku_name
 }
 
-# resource "azurerm_key_vault_access_policy" "kvpolicy" {
-#   key_vault_id = module.keyvault.keyvault_id
-#   tenant_id    = module.keyvault.keyvault_tenant_id
-#   object_id    = module.keyvault.keyvault_object_id
-
-#   key_permissions = [
-#     "Get",
-#     "List"
-#   ]
-
-#   secret_permissions = [
-#     "Get",
-#     "Set",
-#     "List"
-#   ]
-
-#   storage_permissions = [
-#     "Get",
-#   ]
-
-# }
 
 resource "azurerm_key_vault_secret" "spnsecret" {
   name         = module.serviceprincipal.service_principle_object_id
